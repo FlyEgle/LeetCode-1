@@ -1,11 +1,12 @@
 # LeetCode
 
-Solved 6/495 problems.
+Solved 7/495 problems.
 
 ## Algorithms
 
 \# | Title | Solution
 -- | -- | --
+7 | [Reverse Integer](https://leetcode.com/problems/reverse-integer) | [reverse-integer.cpp](7.Reverse_Integer/reverse-integer.cpp)
 6 | [ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion) | [zigzag-conversion.cpp](6.ZigZag_Conversion/zigzag-conversion.cpp)
 5 | [Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring) | [longest-palindromic-substring.cpp](5.Longest_Palindromic_Substring/longest-palindromic-substring.cpp)
 4 | [Median of Two Sorted Arrays](https://leetcode.com/problems/median-of-two-sorted-arrays) | [median-of-two-sorted-arrays.cpp](4.Median_of_Two_Sorted_Arrays/median-of-two-sorted-arrays.cpp)

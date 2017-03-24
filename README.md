@@ -1,11 +1,12 @@
 # LeetCode
 
-Solved 8/495 problems.
+Solved 9/495 problems.
 
 ## Algorithms
 
 \# | Title | Solution
 -- | -- | --
+9 | [Palindrome Number](https://leetcode.com/problems/palindrome-number) | [palidrome-number.cpp](9.Palindrome_Number/palidrome-number.cpp)
 8 | [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi) | [string-to-integer-atoi.cpp](8.String_to_Integer_atoi/string-to-integer-atoi.cpp)
 7 | [Reverse Integer](https://leetcode.com/problems/reverse-integer) | [reverse-integer.cpp](7.Reverse_Integer/reverse-integer.cpp)
 6 | [ZigZag Conversion](https://leetcode.com/problems/zigzag-conversion) | [zigzag-conversion.cpp](6.ZigZag_Conversion/zigzag-conversion.cpp)

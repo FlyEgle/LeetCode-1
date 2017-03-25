@@ -1,11 +1,12 @@
 # LeetCode
 
-Solved 9/495 problems.
+Solved 10/495 problems.
 
 ## Algorithms
 
 \# | Title | Solution
 -- | -- | --
+10 | [Regular Expression Matching](https://leetcode.com/problems/regular-expression-matching) | [regular-expression-matching.cpp](10.Regular_Expression_Matching/regular-expression-matching.cpp)
 9 | [Palindrome Number](https://leetcode.com/problems/palindrome-number) | [palidrome-number.cpp](9.Palindrome_Number/palidrome-number.cpp)
 8 | [String to Integer (atoi)](https://leetcode.com/problems/string-to-integer-atoi) | [string-to-integer-atoi.cpp](8.String_to_Integer_atoi/string-to-integer-atoi.cpp)
 7 | [Reverse Integer](https://leetcode.com/problems/reverse-integer) | [reverse-integer.cpp](7.Reverse_Integer/reverse-integer.cpp)

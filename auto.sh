@@ -28,14 +28,8 @@ function do_test {
     if [ -z "$problem" ]
     then
         echo "Nothing for test."
-        return
-    fi
-
-    if [ -z "$2" ]
-    then
-        leetcode test ${problem}
     else
-        leetcode test ${problem} -t $2
+        leetcode test ${problem} -t $OPTARG
     fi
 }
 
@@ -85,17 +79,16 @@ EOF
 if [ -z "$1" ]
 then
     show_problem
+    exit
 fi
 
-while [ -n "$1" ]
+while getopts 't:sch' arg
 do
-    case "$1" in
-        -t) do_test ;;
-        -s) submit_problem ;;
-        -c) git_commit ;;
-        -h) show_help ;;
-
+    case $arg in
+        t) do_test ;;
+        s) submit_problem ;;
+        c) git_commit ;;
+        h) show_help ;;
         *) show_help ;;
     esac
-    shift
 done

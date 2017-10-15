@@ -82,7 +82,7 @@ then
     exit
 fi
 
-while getopts 't:sch' arg
+while getopts 'tsch' arg
 do
     case $arg in
         t) do_test ;;

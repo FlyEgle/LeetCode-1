@@ -1,42 +1,45 @@
 #!/bin/bash
 
 basepath=$(cd `dirname $0`; pwd)
+problemstr=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
+problem=${problemstr#*/}
+problemNo=${problem%%.*}
+testcase=""
 
 function show_problem {
     cd $basepath/code
 
-    status=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
-
-    if [ -z "$status" ]
+    if [ -z "$problem" ]
     then
-        problemNo=`cat ../README.md | grep "\d*/\d*" | awk '{print $2}'`
-        problemNo=$[${problemNo%/*}+1]
         leetcode show ${problemNo} -gxl cpp
-        problem=`ls | grep ${problemNo}.*.cpp`
-        vim ${problem}
-    else
-        problem=${status}
-        vim ${problem}
     fi
+    vim ${problem}
 }
 
 function do_test {
     cd $basepath/code
 
-    problem=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
+    if [ -z "$problem" ]
+    then
+        echo "Nothing for test."
+    else
+        leetcode test ${problem}
+    fi
+}
+
+function do_my_test {
+    cd $basepath/code
 
     if [ -z "$problem" ]
     then
         echo "Nothing for test."
     else
-        leetcode test ${problem} -t $OPTARG
+        leetcode test ${problem} -t $testcase
     fi
 }
 
 function submit_problem {
     cd $basepath/code
-
-    problem=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
 
     if [ -z "$problem" ]
     then
@@ -49,15 +52,10 @@ function submit_problem {
 function git_commit {
     cd $basepath
 
-    str=`git status | grep ".cpp"`
-    str=${str#*/}
-    target=${str%%.*}
-    sedflag='s/'$[${target}-1]'\//'${target}'\//g'
-
+    sedflag='s/'$[${problemNo}-1]'\//'${problemNo}'\//g'
     sed -i ${sedflag} ./README.md
 
     gitflag=`cat ./README.md | grep "\d*/\d*" | awk '{print $2}'`
-
     git add --all
     git commit -m ${gitflag}
 }
@@ -69,10 +67,11 @@ SYNOPSIS
 
 DESCRIPTION
     [none]  show problem
-    -t      do test
-    -s      submit
-    -c      git commit
-    -h      show_help
+    -t                  do test
+    --t 'testcase'      do test with test cases
+    -s                  submit
+    -c                  git commit
+    -h                  show_help
 EOF
 }
 
@@ -82,13 +81,28 @@ then
     exit
 fi
 
-while getopts 'tsch' arg
+ARGS=`getopt -o tsch --long t: -- "$@"`
+if [ $? != 0 ]
+then
+    echo "Parameter error."
+    exit 1
+fi
+
+eval set -- "${ARGS}"
+
+while [ -n "$1" ]
 do
-    case $arg in
-        t) do_test ;;
-        s) submit_problem ;;
-        c) git_commit ;;
-        h) show_help ;;
+    case $1 in
+        -t) do_test ;;
+        --t) testcase=$2
+            do_my_test ;;
+        -s) submit_problem ;;
+        -c) git_commit ;;
+        -h) show_help ;;
+
+        --) shift
+            break ;;
         *) show_help ;;
     esac
+    shift
 done

@@ -1,17 +1,26 @@
 #!/bin/bash
 
 basepath=$(cd `dirname $0`; pwd)
-problemstr=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
-problem=${problemstr#*/}
-problemNo=${problem%%.*}
+problemstr=""
+problem=""
+problemNo=""
 testcase=""
+
+function get_problem {
+    problemstr=`git status | grep ".cpp" | sed -e 's/^[ \t]*//g'`
+    problem=${problemstr#*/}
+    problemNo=${problem%%.*}
+}
 
 function show_problem {
     cd $basepath/code
 
     if [ -z "$problem" ]
     then
+        search=`cat ../README.md | grep "\d*/" | awk '{print $2}'`
+        problemNo=$[${search%/*}+1]
         leetcode show ${problemNo} -gxl cpp
+        get_problem
     fi
     vim ${problem}
 }
@@ -74,6 +83,9 @@ DESCRIPTION
     -h                  show_help
 EOF
 }
+
+# main
+get_problem
 
 if [ -z "$1" ]
 then

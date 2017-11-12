@@ -111,10 +111,6 @@ do
         -s) submit_problem ;;
         -c) git_commit ;;
         -h) show_help ;;
-
-        --) shift
-            break ;;
-        *) show_help ;;
     esac
     shift
 done

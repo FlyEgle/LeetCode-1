@@ -1,3 +1,3 @@
 # LeetCode
 
-Solved 105/617 problems.
+Solved 106/617 problems.
